@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "client-server-demo"
+version = "0.1.0"
+description = ""
+authors = ["Denis Sokolov <param3456@gmail.com>"]
+readme = "README.md"
+packages = [{include = "client_server_demo"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+Flask = "^2.3.2"
+requests = "^2.31.0"
+psycopg-binary = "^3.1.9"
+SQLAlchemy = "^2.0.15"
+
+
+[tool.poetry.group.dev.dependencies]
+black = "^23.3.0"
+isort = "^5.12.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
