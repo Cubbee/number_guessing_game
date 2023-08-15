@@ -1,6 +1,9 @@
-import random
+from __future__ import annotations
+
 import json
 import os
+import random
+
 from flask import Flask, request
 
 app = Flask(__name__)
@@ -11,7 +14,7 @@ number_store_p = "number_store.txt"
 def save_number(user_id: int, number: int):
     current_data = {}
     if os.path.exists(number_store_p):
-        with open(number_store_p, "r") as f:
+        with open(number_store_p) as f:
             current_data = json.load(f)
 
     current_data[user_id] = number
@@ -22,7 +25,7 @@ def save_number(user_id: int, number: int):
 
 def try_read_number(user_id: int) -> int | None:
     try:
-        with open(number_store_p, "r") as f:
+        with open(number_store_p) as f:
             current_data = json.load(f)
         return current_data[user_id]
     except (ValueError, FileNotFoundError):

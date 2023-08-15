@@ -1,4 +1,7 @@
+from __future__ import annotations
+
 import random
+
 from flask import Flask
 
 app = Flask(__name__)

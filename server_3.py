@@ -1,4 +1,7 @@
+from __future__ import annotations
+
 import random
+
 from flask import Flask
 
 app = Flask(__name__)
@@ -13,7 +16,7 @@ def save_number(number):
 
 def try_read_number():
     try:
-        with open(number_store_p, "r") as f:
+        with open(number_store_p) as f:
             return int(f.read())
     except (ValueError, FileNotFoundError):
         return None

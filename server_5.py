@@ -1,12 +1,15 @@
-import random
+from __future__ import annotations
+
 import json
-import os
-from flask import Flask, request
 import logging
+import os
+import random
+from logging.config import dictConfig
+
+from flask import Flask, request
 
 # logger = logging.getLogger(__name__)
 
-from logging.config import dictConfig
 
 dictConfig(
     {
@@ -29,7 +32,7 @@ def save_number(user_id: str, number: int | None):
     current_data = {}
     if os.path.exists(number_store_p):
         try:
-            with open(number_store_p, "r") as f:
+            with open(number_store_p) as f:
                 current_data = json.load(f)
         except json.decoder.JSONDecodeError:
             app.logger.exception("Error reading number store")
@@ -45,7 +48,7 @@ def save_number(user_id: str, number: int | None):
 def try_read_number(user_id: str) -> int | None:
     app.logger.info(f"Reading number for user {user_id}")
     try:
-        with open(number_store_p, "r") as f:
+        with open(number_store_p) as f:
             current_data = json.load(f)
         return current_data.get(user_id)
     except (ValueError, FileNotFoundError):

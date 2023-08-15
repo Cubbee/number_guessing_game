@@ -11,4 +11,3 @@ CREATE TABLE IF NOT EXISTS game(
     status varchar(255) NOT NULL,
     FOREIGN KEY (player_id) REFERENCES users(id)
 );
-

@@ -1,0 +1,56 @@
+default_stages:
+- commit
+default_language_version:
+  python: python3.10
+exclude: "apps/snowflake/config/.*"
+repos:
+  - repo: "https://github.com/pre-commit/pre-commit-hooks"
+    rev: v4.4.0
+    hooks:
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-json
+      - id: check-toml
+      - id: check-ast
+      - id: check-added-large-files
+      - id: debug-statements
+      - id: check-builtin-literals
+      - id: check-byte-order-marker
+        exclude: ^apps/workout/utils/.*\.(csv|json)$
+      - id: check-case-conflict
+      - id: check-merge-conflict
+      - id: check-symlinks
+      - id: detect-private-key
+      - id: forbid-new-submodules
+      - id: mixed-line-ending
+        args:
+          - "--fix=no"
+      - id: trailing-whitespace
+        args:
+          - "--markdown-linebreak-ext=md"
+  - repo: https://github.com/ambv/black
+    rev: 23.7.0
+    hooks:
+      - id: black
+  - repo: https://github.com/PyCQA/isort
+    rev: 5.11.4
+    hooks:
+      - id: isort
+        args: [
+          "--profile", "black", "--add-import", "from __future__ import annotations"
+        ]
+  - repo: https://github.com/pycqa/flake8
+    rev: 6.1.0
+    hooks:
+      - id: flake8
+        args: ["--exclude", "locustfile.py"]
+  - repo: https://github.com/PyCQA/bandit
+    rev: 1.7.4
+    hooks:
+    - id: bandit
+      args: ["--exclude", "tests,locustfile.py"]
+  - repo: https://github.com/asottile/pyupgrade
+    rev: v3.9.0
+    hooks:
+    - id: pyupgrade
+      args: ["--py310-plus"]
